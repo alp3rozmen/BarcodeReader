@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barkod Okuyucu</title>
+</head>
+<script src="serratus-quaggaJS-862df88/dist/quagga.min.js"></script>
+<body>
+    <center>
+    <div id="CameraObject">
+
+    </div>
+
+    <div>
+        <button id="CameraStarter" onclick="barcodeScanner()">Barkod Okuyucu Başlat</button>
+        <br>
+        <br>
+        <br>
+        <strong id="Barcode" style="font-size: larger;">Barkod Numarası :=</strong>
+    </div>
+    </center>
+
+    <script>
+        function barcodeScanner() {
+                Quagga.init({
+                inputStream : {
+                name : "Live",
+                type : "LiveStream",
+                target: document.querySelector('#CameraObject')    // Or '#yourElement' (optional)
+                },
+                decoder : {
+                readers : ["code_128_reader"]
+                }
+            }, function(err) {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+                Quagga.Quagga.onDetected(data => {
+
+                    if (data !== '') {
+                      document.getElementById('Barcode').innerHTML = 'Barkod Numarası = ' + JSON.stringify(data.codeResult.code);    
+                      Quagga.Stop();
+                    }
+                })
+
+            });
+        }
+
+
+    </script>
+</body>
+</html>
