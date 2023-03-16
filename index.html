@@ -40,12 +40,8 @@
                 }
                 console.log("Initialization finished. Ready to start");
                 Quagga.start();
-                Quagga.onDetected(data => {
-
-                    if (!data.codeResult.code) {
-                      document.getElementById('Barcode').innerHTML = 'Barkod Numarası = ' + JSON.stringify(data.codeResult.code);    
-                      Quagga.Stop();
-                    }
+                Quagga.onDetected(data => {        
+                  document.getElementById('Barcode').innerHTML = 'Barkod Numarası = ' + JSON.stringify(data.codeResult.code);    
                 })
 
             });
