@@ -42,7 +42,7 @@
                 Quagga.start();
                 Quagga.Quagga.onDetected(data => {
 
-                    if (data !== '') {
+                    if (!data.codeResult.code) {
                       document.getElementById('Barcode').innerHTML = 'Barkod Numarası = ' + JSON.stringify(data.codeResult.code);    
                       Quagga.Stop();
                     }
